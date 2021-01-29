@@ -33,8 +33,8 @@ jobs:
 
       - name: Build Unity
         uses: game-ci/unity-builder@v2.0-alpha-6
-        with:
-          unityLicense: SC-H2K3-5W5C-6UKG-3F3D-J8ZA
+        env:
+          UNITY_LICENSE: SC-H2K3-5W5C-6UKG-3F3D-J8ZA
       
       - name: test
         run: cd / && tree
