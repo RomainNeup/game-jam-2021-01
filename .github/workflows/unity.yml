@@ -32,6 +32,7 @@ jobs:
         id: cache
         with:
           path: path/to/dependencies
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
 
       - name: Build Unity
         uses: game-ci/unity-builder@v2.0-alpha-6
