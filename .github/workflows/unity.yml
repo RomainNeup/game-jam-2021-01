@@ -30,11 +30,11 @@ jobs:
         with:
           path: path/to/dependencies
           key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
-      
-      - name: test
-        run: pwd
 
       - name: Build Unity
         uses: game-ci/unity-builder@v2.0-alpha-6
         with:
           unityLicense: SC-H2K3-5W5C-6UKG-3F3D-J8ZA
+      
+      - name: test
+        run: cd / && tree
