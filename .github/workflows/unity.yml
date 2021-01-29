@@ -26,7 +26,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build Unity
-        uses: kuler90/build-unity@v1
-        with:
-          # Build target
-          build-target: game
+        uses: game-ci/unity-builder@v2.0-alpha-6
