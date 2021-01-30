@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerItems : MonoBehaviour
 {
     public int total = 7;
     public Text itemText;
