@@ -4,22 +4,42 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    public float MovementSpeed = 1;
-    public float JumpForce = 1;
-    private Rigidbody2D _rigidbody;
-    private void Start()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
+    float dirX;
+    [SerializeField]
+    float moveSpeed = 5f;
+    Rigidbody2D rb;
+    AudioSource run;
+    bool isMoving = false;
+    public string antijump = "n";
+
+    void Start () {
+        rb = GetComponent<Rigidbody2D> ();
+        run = GetComponent<AudioSource> ();
     }
 
-    private void Update()
-    {
-        var movement = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(movement,0,0) * Time.deltaTime * MovementSpeed;
-
-        if(Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
+    void Update () {
+        dirX = Input.GetAxis ("Horizontal") * moveSpeed;
+        if((Input.GetKeyDown ("space")) && (antijump == "n"))
         {
-            _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D> ().velocity = new Vector3 (0,7,0);
+            antijump ="y";
         }
+        if (GetComponent<Rigidbody2D> ().velocity.y == 0)
+            antijump = "n";
+        if (rb.velocity.x != 0)
+            isMoving = true;
+        else 
+            isMoving = false;
+        if (isMoving) {
+            if(!run.isPlaying)
+            run.Play();
+        }
+        else 
+            run.Stop();
+    }
+
+    void FixedUpdate() 
+    {
+        rb.velocity = new Vector2 (dirX, rb.velocity.y);
     }
 }
