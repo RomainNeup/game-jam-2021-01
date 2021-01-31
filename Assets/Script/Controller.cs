@@ -69,7 +69,7 @@ public class Controller : MonoBehaviour
     {
         if(col.gameObject.tag == "Enemy")
         {
-            life.RemoveLife()
+            life.RemoveLife();
         }
     }
 }
