@@ -64,4 +64,12 @@ public class Controller : MonoBehaviour
         if(item.gameObject.CompareTag("Die"))
             life.Die();
     }
+    
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Enemy")
+        {
+            life.RemoveLife()
+        }
+    }
 }
