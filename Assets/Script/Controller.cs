@@ -42,4 +42,9 @@ public class Controller : MonoBehaviour
     {
         rb.velocity = new Vector2 (dirX, rb.velocity.y);
     }
+    void GetBall(Collider2D ball)
+    {
+        if(ball.gameObject.CompareTag("ball"))
+            Destroy(ball.gameObject);
+    }
 }
