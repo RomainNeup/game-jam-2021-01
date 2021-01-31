@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemy_moove : MonoBehaviour
+public class EnemyMove : MonoBehaviour
 {
     public  float speed;
     public bool MoveRight;
