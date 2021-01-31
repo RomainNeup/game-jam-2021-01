@@ -6,16 +6,20 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHeal = 20;
     public Text lifeText;
+    private int currentHeal;
 
     void Update() {
-        lifeText.text = maxHeal.ToString() + "x";
+        lifeText.text = currentHeal.ToString() + "x";
+    }
+
+    void Start() {
+        currentHeal = maxHeal;
     }
 
     public bool IsAlive() {
         return currentHeal > 0;
     }
 
-    int currentHeal;
 
     public void AddLife()
     {
