@@ -6,22 +6,27 @@ public class Controller : MonoBehaviour
 {
     float dirX;
     [SerializeField]
-    float moveSpeed = 5f;
+    public float moveSpeed = 5f;
+    public float jumpSpeed = 7;
     Rigidbody2D rb;
     AudioSource run;
     bool isMoving = false;
     public string antijump = "n";
+    PlayerItems items;
+    PlayerHealth life;
 
     void Start () {
         rb = GetComponent<Rigidbody2D> ();
         run = GetComponent<AudioSource> ();
+        items = GetComponent<PlayerItems> ();
+        life = GetComponent<PlayerHealth> ();
     }
 
     void Update () {
         dirX = Input.GetAxis ("Horizontal") * moveSpeed;
         if((Input.GetKeyDown ("space")) && (antijump == "n"))
         {
-            GetComponent<Rigidbody2D> ().velocity = new Vector3 (0,7,0);
+            GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, jumpSpeed, 0);
             antijump ="y";
         }
         if (GetComponent<Rigidbody2D> ().velocity.y == 0)
@@ -42,9 +47,14 @@ public class Controller : MonoBehaviour
     {
         rb.velocity = new Vector2 (dirX, rb.velocity.y);
     }
-    void GetBall(Collider2D ball)
+
+    void OnTriggerEnter2D(Collider2D item)
     {
-        if(ball.gameObject.CompareTag("ball"))
-            Destroy(ball.gameObject);
+        if(item.gameObject.CompareTag("ball")) {
+            Destroy(item.gameObject);
+            items.AddItem();
+        }
+        if(item.gameObject.CompareTag("Die"))
+            life.Die();
     }
 }

@@ -11,7 +11,7 @@ public class PlayerItems : MonoBehaviour
         itemText.text = current.ToString() + "x";
     }
 
-    int current;
+    int current = 0;
 
     public void AddItem()
     {
