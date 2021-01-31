@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    public Animator animator;
     float dirX;
     [SerializeField]
     public float moveSpeed = 5f;
@@ -24,13 +25,18 @@ public class Controller : MonoBehaviour
 
     void Update () {
         dirX = Input.GetAxis ("Horizontal") * moveSpeed;
+        animator.SetFloat("Movement", Mathf.Abs(dirX));
         if((Input.GetKeyDown ("space")) && (antijump == "n"))
         {
             GetComponent<Rigidbody2D> ().velocity = new Vector3 (0, jumpSpeed, 0);
             antijump ="y";
+            animator.SetBool("IsJumping", true);
         }
-        if (GetComponent<Rigidbody2D> ().velocity.y == 0)
+        if (GetComponent<Rigidbody2D> ().velocity.y == 0) 
+        {
             antijump = "n";
+            animator.SetBool("IsJumping", false);
+        }
         if (rb.velocity.x != 0)
             isMoving = true;
         else 
@@ -41,6 +47,7 @@ public class Controller : MonoBehaviour
         }
         else 
             run.Stop();
+        animator.SetBool("IsAlive", life.IsAlive());
     }
 
     void FixedUpdate() 
