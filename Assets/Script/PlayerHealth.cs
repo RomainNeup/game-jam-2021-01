@@ -6,16 +6,23 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHeal = 20;
     public Text lifeText;
+    private int currentHeal;
 
     void Update() {
-        lifeText.text = maxHeal.ToString() + "x";
+        lifeText.text = currentHeal.ToString() + "x";
+    }
+
+    void Start() {
+        currentHeal = maxHeal;
     }
 
     public bool IsAlive() {
         return currentHeal > 0;
     }
 
-    int currentHeal;
+    public int getHeal() {
+        return currentHeal;
+    }
 
     public void AddLife()
     {
@@ -25,9 +32,6 @@ public class PlayerHealth : MonoBehaviour
     public void RemoveLife()
     {
         currentHeal = Mathf.Clamp(currentHeal - 1, 0, maxHeal);
-        if (currentHeal <= 0) {
-            Debug.Log("DEAD"); //TODO DEAD
-        }
     }
 
     public void Die()
