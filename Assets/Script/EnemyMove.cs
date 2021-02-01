@@ -11,11 +11,9 @@ public class EnemyMove : MonoBehaviour
     {
         if (MoveRight) {
             transform.Translate(2 * Time.deltaTime * speed ,0,0);
-            transform.localScale = new Vector2 (2,2);
         }
         else {
             transform.Translate(-2 * Time.deltaTime * speed ,0,0);
-            transform.localScale = new Vector2 (-2,2);
         }
     } 
 
@@ -23,6 +21,7 @@ public class EnemyMove : MonoBehaviour
     {
         if(trig.gameObject.CompareTag("turner"))
 
+            transform.localScale = new Vector2 (-transform.localScale.x, transform.localScale.y);
             if(MoveRight) {
                 MoveRight = false;
             }

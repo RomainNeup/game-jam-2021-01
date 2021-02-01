@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class shootPlayer : MonoBehaviour
+public class ShootPlayer : MonoBehaviour
 {
     public GameObject projectile;
     public Vector2 velocity;
@@ -26,20 +26,6 @@ public class shootPlayer : MonoBehaviour
         
             go.GetComponent<Rigidbody2D>().velocity = new Vector2 (velocity.x * transform.localScale.x, velocity.y);
             Destroy(go, ShootDestroy);
-        }
-
-        if (Input.GetKeyDown (KeyCode.R) && canShoot){
-            GameObject go = (GameObject) Instantiate(projectile, (Vector2)transform.position + offsetL * transform.localScale.x, Quaternion.identity);
-        
-            go.GetComponent<Rigidbody2D>().velocity = new Vector2 ( (0 - velocity.x) * transform.localScale.x, velocity.y);
-            Destroy(go, ShootDestroy);
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.tag == "Ennemy" && col.gameObject.tag != "Player"){
-            Destroy(col.gameObject);
         }
     }
 

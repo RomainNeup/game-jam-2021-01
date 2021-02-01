@@ -8,11 +8,23 @@ public class GameManager : MonoBehaviour
     public GameObject GOPanel;
     public GameObject StartPanel;
     public GameObject GameOverlay;
+    public GameObject WinScreen;
+    public enum STATES {
+        INGAME,
+        PAUSE,
+        DEAD,
+        START,
+        WIN
+    };
+    public STATES GameState;
+
+    public void setGameState(STATES state) {
+        GameState = state;
+    }
 
     void Start()
     {
-        CleanScreen();
-        StartMenu();
+        GameState = STATES.START;
     }
 
     void CleanScreen()
@@ -20,28 +32,39 @@ public class GameManager : MonoBehaviour
         GOPanel.SetActive(false);
         StartPanel.SetActive(false);
         GameOverlay.SetActive(false);
+        WinScreen.SetActive(false);
     }
-    void GameOver()
+    public void GameOver()
     {
-        CleanScreen();
         GOPanel.SetActive(true);
     }
 
-    void StartMenu()
+    public void StartMenu()
     {
-        CleanScreen();
         StartPanel.SetActive(true);
+    }
+
+    public void WinGame()
+    {
+        WinScreen.SetActive(true);
     }
 
     void Game()
     {
-        CleanScreen();
         GameOverlay.SetActive(true);
     }
 
     void Update()
     {
-
+        CleanScreen();
+        if (GameState == STATES.START)
+            StartMenu();
+        if (GameState == STATES.DEAD)
+            GameOver();
+        if (GameState == STATES.INGAME)
+            Game();
+        if (GameState == STATES.WIN)
+            WinGame();
     }
 
 }

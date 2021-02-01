@@ -13,11 +13,14 @@ public class PlayerItems : MonoBehaviour
 
     int current = 0;
 
+    public int getCurrentItems()
+    {
+        return current;
+    }
+
     public void AddItem()
     {
         current = Mathf.Clamp(current + 1, 0, total);
-        if (current == total)
-            Debug.Log("WIN"); //TODO WIN
     }
 
     public void RemoveItem()

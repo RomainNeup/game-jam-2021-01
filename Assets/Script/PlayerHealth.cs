@@ -20,6 +20,9 @@ public class PlayerHealth : MonoBehaviour
         return currentHeal > 0;
     }
 
+    public int getHeal() {
+        return currentHeal;
+    }
 
     public void AddLife()
     {
@@ -29,9 +32,6 @@ public class PlayerHealth : MonoBehaviour
     public void RemoveLife()
     {
         currentHeal = Mathf.Clamp(currentHeal - 1, 0, maxHeal);
-        if (currentHeal <= 0) {
-            Debug.Log("DEAD"); //TODO DEAD
-        }
     }
 
     public void Die()
